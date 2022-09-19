@@ -1,0 +1,13 @@
+DROP TABLE distribution_points;
+DROP TABLE users_base;
+DROP TABLE users_subscriptions;
+DROP TABLE users_game_statistic;
+DROP TABLE events;
+DROP TABLE users_ban;
+DROP TABLE ad;
+DROP TABLE ad_params;
+DROP TABLE users_pay;
+DROP TABLE users;
+DROP TABLE cities;
+DROP TABLE points_game;
+DROP TABLE subscriptions;

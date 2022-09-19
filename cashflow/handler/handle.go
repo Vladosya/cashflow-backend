@@ -21,6 +21,7 @@ func (h *Handler) InitRoutes() *gin.Engine { // обработчик роуто�
 	api := router.Group("/api-v1")
 	{
 		api.POST("/user/registration", h.registrationUser)
+		api.POST("/ad/changeParams", h.adChangeParams)
 	}
 
 	return router

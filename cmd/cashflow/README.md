@@ -62,3 +62,19 @@ RETURN:
   -status: 200 <- typeof int
   -message: "Успешная активация мероприятия" <- typeof string
 ```
+
+### Завершение мероприятия (если мероприятие уже состоялось)
+
+```sh
+Url: http://localhost:8080/api-v1/ad/toCompleteAd
+```js
+{
+  "body": {
+    "id": int, <- Идентификатор мероприятия из таблицы ad поле id
+  }
+}
+```sh
+RETURN: 
+  -status: 200 <- typeof int
+  -message: "Успешное завершение мероприятия" <- typeof string
+```

@@ -20,11 +20,12 @@ func (h *Handler) InitRoutes() *gin.Engine { // обработчик роуто�
 
 	api := router.Group("/api-v1")
 	{
-		api.POST("/user/registration", h.registrationUser)
-		api.POST("/ad/changeParams", h.adChangeParams)
-		api.POST("/ad/createAd", h.createAd)
-		api.POST("/ad/activateAd", h.activateAd)
-		api.POST("/ad/summarizingAd", h.summarizingAd)
+		api.POST("/user/registration", h.registrationUser) // Регистрация пользователя
+		api.POST("/ad/changeParams", h.adChangeParams)     // Изменение стоимости участия мероприятия
+		api.POST("/ad/createAd", h.createAd)               // Создание мероприятия
+		api.POST("/ad/activateAd", h.activateAd)           // Активация мероприятия (сделать видимым мероприятие для всех пользователей)
+		api.POST("/ad/toCompleteAd", h.ToCompleteAd)       // Завершить мероприятия
+		api.POST("/ad/summarizingAd", h.summarizingAd)     // распределение баллов по участникам за пройденное мероприятие
 	}
 
 	return router

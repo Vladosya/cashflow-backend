@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS ad(
     points_options INTEGER,
     is_visible BOOLEAN NOT NULL DEFAULT 'f',
     is_finished BOOLEAN NOT NULL DEFAULT 'f',
+    is_cancel BOOLEAN NOT NULL DEFAULT 'f',
     FOREIGN KEY (points_options) REFERENCES points_game (id),
     FOREIGN KEY (price) REFERENCES ad_params (id)
 );

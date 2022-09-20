@@ -43,6 +43,14 @@ func (r *AdPostgres) ActivateAd(id int) error {
 	return nil
 }
 
+func (r *AdPostgres) ToCompleteAd(id int) error {
+	_, err := r.db.Exec("UPDATE ad SET is_finished = true WHERE id = $1", id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func (r *AdPostgres) SummarizingAd() error {
 	return nil
 }

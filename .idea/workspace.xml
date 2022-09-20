@@ -13,6 +13,7 @@
       <change beforePath="$PROJECT_DIR$/cashflow/service/ad.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/service/ad.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cashflow/service/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/service/service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/cashflow/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/cashflow/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schema/init.up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/schema/init.up.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

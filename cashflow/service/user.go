@@ -14,7 +14,7 @@ func NewUserService(r repository.TodoUser) *UserService {
 	}
 }
 
-func (s *UserService) RegistrationUser() error {
+func (s *UserService) RegistrationUser() (error, int) {
 	return s.repo.RegistrationUser()
 }
 

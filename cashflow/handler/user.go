@@ -11,16 +11,49 @@ func (h *Handler) registrationUser(c *gin.Context) {
 	}
 	var body Body
 	if err := c.BindJSON(&body); err != nil {
-		newErrorResponse(c, http.StatusBadRequest, "Invalid input body")
+		c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"status":  http.StatusBadRequest,
+			"message": "некорректно переданы данные в body",
+		})
 		return
 	}
-	err := h.services.RegistrationUser()
+	err, statusCode := h.services.RegistrationUser()
 	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		c.JSON(statusCode, map[string]interface{}{
+			"status":  statusCode,
+			"message": err.Error(),
+		})
 		return
 	}
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"status":  http.StatusOK,
-		"message": "Успешное подтверждение профиля",
+	c.JSON(statusCode, map[string]interface{}{
+		"status":  statusCode,
+		"message": err.Error(),
+	})
+}
+
+func (h *Handler) entryToAd(c *gin.Context) {
+	type Body struct {
+		IdUser int `json:"id_user"`
+		IdAd   int `json:"id_ad"`
+	}
+	var body Body
+	if err := c.BindJSON(&body); err != nil {
+		c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"status":  http.StatusBadRequest,
+			"message": "некорректно переданы данные в body",
+		})
+		return
+	}
+	err, statusCode := h.services.EntryToAd(body.IdUser, body.IdAd)
+	if err != nil {
+		c.JSON(statusCode, map[string]interface{}{
+			"status":  statusCode,
+			"message": err.Error(),
+		})
+		return
+	}
+	c.JSON(statusCode, map[string]interface{}{
+		"status":  statusCode,
+		"message": err.Error(),
 	})
 }

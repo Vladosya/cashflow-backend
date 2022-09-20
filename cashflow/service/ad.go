@@ -15,26 +15,26 @@ func NewAdService(r repository.TodoAd) *AdService {
 	}
 }
 
-func (s *AdService) AdChangeParams(city string, price int) error {
+func (s *AdService) AdChangeParams(city string, price int) (error, int) {
 	return s.repo.AdChangeParams(city, price)
 }
 
-func (s *AdService) CreateAd(adParam appl_row.Ad) error {
+func (s *AdService) CreateAd(adParam appl_row.Ad) (error, int) {
 	return s.repo.CreateAd(adParam)
 }
 
-func (s *AdService) ActivateAd(id int) error {
+func (s *AdService) ActivateAd(id int) (error, int) {
 	return s.repo.ActivateAd(id)
 }
 
-func (s *AdService) ToCompleteAd(id int) error {
+func (s *AdService) ToCompleteAd(id int) (error, int) {
 	return s.repo.ToCompleteAd(id)
 }
 
-func (s *AdService) CancelAd(id int) error {
+func (s *AdService) CancelAd(id int) (error, int) {
 	return s.repo.CancelAd(id)
 }
 
-func (s *AdService) SummarizingAd() error {
+func (s *AdService) SummarizingAd() (error, int) {
 	return s.repo.SummarizingAd()
 }

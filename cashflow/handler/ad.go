@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"github.com/Vladosya/our_project/appl_row"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -14,17 +13,23 @@ func (h *Handler) adChangeParams(c *gin.Context) {
 	}
 	var body Body
 	if err := c.BindJSON(&body); err != nil {
-		newErrorResponse(c, http.StatusBadRequest, "Invalid input body")
+		c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"status":  http.StatusBadRequest,
+			"message": "некорректно переданы данные в body",
+		})
 		return
 	}
-	err := h.services.AdChangeParams(body.City, body.Price)
+	err, statusCode := h.services.AdChangeParams(body.City, body.Price)
 	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		c.JSON(statusCode, map[string]interface{}{
+			"status":  statusCode,
+			"message": err.Error(),
+		})
 		return
 	}
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"status":  http.StatusOK,
-		"message": fmt.Sprintf("Успешное изменение стоимости участия в городе %s", body.City),
+	c.JSON(statusCode, map[string]interface{}{
+		"status":  statusCode,
+		"message": err.Error(),
 	})
 }
 
@@ -42,17 +47,23 @@ func (h *Handler) createAd(c *gin.Context) {
 	}
 	var body Body
 	if err := c.BindJSON(&body); err != nil {
-		newErrorResponse(c, http.StatusBadRequest, "Invalid input body")
+		c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"status":  http.StatusBadRequest,
+			"message": "некорректно переданы данные в body",
+		})
 		return
 	}
-	err := h.services.CreateAd(appl_row.Ad(body))
+	err, statusCode := h.services.CreateAd(appl_row.Ad(body))
 	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		c.JSON(statusCode, map[string]interface{}{
+			"status":  statusCode,
+			"message": err.Error(),
+		})
 		return
 	}
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"status":  http.StatusOK,
-		"message": "Успешное создание мероприятия",
+	c.JSON(statusCode, map[string]interface{}{
+		"status":  statusCode,
+		"message": err.Error(),
 	})
 }
 
@@ -62,17 +73,23 @@ func (h *Handler) activateAd(c *gin.Context) {
 	}
 	var body Body
 	if err := c.BindJSON(&body); err != nil {
-		newErrorResponse(c, http.StatusBadRequest, "Invalid input body")
+		c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"status":  http.StatusBadRequest,
+			"message": "некорректно переданы данные в body",
+		})
 		return
 	}
-	err := h.services.ActivateAd(body.Id)
+	err, statusCode := h.services.ActivateAd(body.Id)
 	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		c.JSON(statusCode, map[string]interface{}{
+			"status":  statusCode,
+			"message": err.Error(),
+		})
 		return
 	}
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"status":  http.StatusOK,
-		"message": "Успешная активация мероприятия",
+	c.JSON(statusCode, map[string]interface{}{
+		"status":  statusCode,
+		"message": err.Error(),
 	})
 }
 
@@ -82,17 +99,23 @@ func (h *Handler) toCompleteAd(c *gin.Context) {
 	}
 	var body Body
 	if err := c.BindJSON(&body); err != nil {
-		newErrorResponse(c, http.StatusBadRequest, "Invalid input body")
+		c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"status":  http.StatusBadRequest,
+			"message": "некорректно переданы данные в body",
+		})
 		return
 	}
-	err := h.services.ToCompleteAd(body.Id)
+	err, statusCode := h.services.ToCompleteAd(body.Id)
 	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		c.JSON(statusCode, map[string]interface{}{
+			"status":  statusCode,
+			"message": err.Error(),
+		})
 		return
 	}
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"status":  http.StatusOK,
-		"message": "Успешное завершение мероприятия",
+	c.JSON(statusCode, map[string]interface{}{
+		"status":  statusCode,
+		"message": err.Error(),
 	})
 }
 
@@ -102,44 +125,23 @@ func (h *Handler) cancelAd(c *gin.Context) {
 	}
 	var body Body
 	if err := c.BindJSON(&body); err != nil {
-		newErrorResponse(c, http.StatusBadRequest, "Invalid input body")
-		return
-	}
-	err := h.services.CancelAd(body.Id)
-	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
-		return
-	}
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"status":  http.StatusOK,
-		"message": "Успешная отмена мероприятия",
-	})
-}
-
-func (h *Handler) entryToAd(c *gin.Context) {
-	type Body struct {
-		IdUser int `json:"id_user"`
-		IdAd   int `json:"id_ad"`
-	}
-	var body Body
-	if err := c.BindJSON(&body); err != nil {
-		c.JSON(http.StatusOK, map[string]interface{}{
+		c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"status":  http.StatusBadRequest,
 			"message": "некорректно переданы данные в body",
 		})
 		return
 	}
-	err, statusCode := h.services.EntryToAd(body.IdUser, body.IdAd)
+	err, statusCode := h.services.CancelAd(body.Id)
 	if err != nil {
-		c.JSON(http.StatusOK, map[string]interface{}{
+		c.JSON(statusCode, map[string]interface{}{
 			"status":  statusCode,
 			"message": err.Error(),
 		})
 		return
 	}
-	c.JSON(http.StatusOK, map[string]interface{}{
+	c.JSON(statusCode, map[string]interface{}{
 		"status":  statusCode,
-		"message": err,
+		"message": err.Error(),
 	})
 }
 

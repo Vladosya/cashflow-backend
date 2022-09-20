@@ -6,17 +6,17 @@ import (
 )
 
 type TodoUser interface {
-	RegistrationUser() error
+	RegistrationUser() (error, int)
 	EntryToAd(userId int, adId int) (error, int)
 }
 
 type TodoAd interface {
-	AdChangeParams(city string, price int) error
-	CreateAd(adParam appl_row.Ad) error
-	ActivateAd(id int) error
-	ToCompleteAd(id int) error
-	CancelAd(id int) error
-	SummarizingAd() error
+	AdChangeParams(city string, price int) (error, int)
+	CreateAd(adParam appl_row.Ad) (error, int)
+	ActivateAd(id int) (error, int)
+	ToCompleteAd(id int) (error, int)
+	CancelAd(id int) (error, int)
+	SummarizingAd() (error, int)
 }
 
 type Service struct {

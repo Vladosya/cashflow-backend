@@ -20,6 +20,10 @@ Url: http://localhost:8080/api-v1/ad/changeParams
 RETURN: 
   -status: 200 <- typeof int
   -message: "Успешное изменение стоимости участия в городе {city}" <- typeof string
+  
+POSSIBLE MISTAKES:
+  -message: "некорректно переданы данные в body";
+  -message: "ошибка изменения из базы данных, {err}";
 ```
 
 ### Создание мероприятия
@@ -45,6 +49,10 @@ Url: http://localhost:8080/api-v1/ad/createAd
 RETURN: 
   -status: 200 <- typeof int
   -message: "Успешное создание мероприятия" <- typeof string
+
+POSSIBLE MISTAKES:
+  -message: "некорректно переданы данные в body";
+  -message: "ошибка создания из базы данных, {err}";
 ```
 
 ### Активация мероприятия (сделать видимым мероприятие для всех)
@@ -61,6 +69,10 @@ Url: http://localhost:8080/api-v1/ad/activateAd
 RETURN: 
   -status: 200 <- typeof int
   -message: "Успешная активация мероприятия" <- typeof string
+ 
+POSSIBLE MISTAKES:
+  -message: "некорректно переданы данные в body";
+  -message: "ошибка обновления из базы данных, {err}";
 ```
 
 ### Завершение мероприятия (если мероприятие уже состоялось)
@@ -77,6 +89,10 @@ Url: http://localhost:8080/api-v1/ad/toCompleteAd
 RETURN: 
   -status: 200 <- typeof int
   -message: "Успешное завершение мероприятия" <- typeof string
+
+POSSIBLE MISTAKES:
+  -message: "некорректно переданы данные в body";
+  -message: "ошибка обновления из базы данных, {err}";
 ```
 
 ### Отмена мероприятия (если мероприятие по каким-то причинам было отменено)
@@ -93,6 +109,10 @@ Url: http://localhost:8080/api-v1/ad/cancelAd
 RETURN: 
   -status: 200 <- typeof int
   -message: "Успешная отмена мероприятия" <- typeof string
+
+POSSIBLE MISTAKES:
+  -message: "некорректно переданы данные в body";
+  -message: "ошибка обновления из базы данных, {err}";
 ```
 
 ### Вступление пользователя в мероприятие (пока без оплаты)

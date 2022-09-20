@@ -12,6 +12,7 @@ type TodoUser interface {
 type TodoAd interface {
 	AdChangeParams(city string, price int) error
 	CreateAd(adParam appl_row.Ad) error
+	ActivateAd(id int) error
 	SummarizingAd() error
 }
 

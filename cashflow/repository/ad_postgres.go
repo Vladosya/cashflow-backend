@@ -35,6 +35,14 @@ func (r *AdPostgres) CreateAd(adParam appl_row.Ad) error {
 	return nil
 }
 
+func (r *AdPostgres) ActivateAd(id int) error {
+	_, err := r.db.Exec("UPDATE ad SET is_visible = true WHERE id = $1", id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func (r *AdPostgres) SummarizingAd() error {
 	return nil
 }

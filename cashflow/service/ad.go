@@ -23,6 +23,10 @@ func (s *AdService) CreateAd(adParam appl_row.Ad) error {
 	return s.repo.CreateAd(adParam)
 }
 
+func (s *AdService) ActivateAd(id int) error {
+	return s.repo.ActivateAd(id)
+}
+
 func (s *AdService) SummarizingAd() error {
 	return s.repo.SummarizingAd()
 }

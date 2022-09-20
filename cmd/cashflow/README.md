@@ -46,3 +46,19 @@ RETURN:
   -status: 200 <- typeof int
   -message: "Успешное создание мероприятия" <- typeof string
 ```
+
+### Активация мероприятия (сделать видимым мероприятие для всех)
+
+```sh
+Url: http://localhost:8080/api-v1/ad/activateAd
+```js
+{
+  "body": {
+    "id": int, <- Идентификатор мероприятия из таблицы ad поле id
+  }
+}
+```sh
+RETURN: 
+  -status: 200 <- typeof int
+  -message: "Успешная активация мероприятия" <- typeof string
+```

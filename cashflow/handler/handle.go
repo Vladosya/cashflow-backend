@@ -23,6 +23,7 @@ func (h *Handler) InitRoutes() *gin.Engine { // обработчик роуто�
 		api.POST("/user/registration", h.registrationUser)
 		api.POST("/ad/changeParams", h.adChangeParams)
 		api.POST("/ad/createAd", h.createAd)
+		api.POST("/ad/activateAd", h.activateAd)
 		api.POST("/ad/summarizingAd", h.summarizingAd)
 	}
 

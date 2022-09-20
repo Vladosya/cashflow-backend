@@ -56,4 +56,24 @@ func (h *Handler) createAd(c *gin.Context) {
 	})
 }
 
+func (h *Handler) activateAd(c *gin.Context) {
+	type Body struct {
+		Id int `json:"id"`
+	}
+	var body Body
+	if err := c.BindJSON(&body); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "Invalid input body")
+		return
+	}
+	err := h.services.ActivateAd(body.Id)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"status":  http.StatusOK,
+		"message": "Успешная активация мероприятия",
+	})
+}
+
 func (h *Handler) summarizingAd(c *gin.Context) {}

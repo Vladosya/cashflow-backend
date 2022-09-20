@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS ad(
     participant INTEGER[] DEFAULT '{}',
     serial_number INTEGER NOT NULL,
     points_options INTEGER,
+    num_of_tables INTEGER NOT NULL DEFAULT 0,
     is_visible BOOLEAN NOT NULL DEFAULT 'f',
     is_finished BOOLEAN NOT NULL DEFAULT 'f',
     is_cancel BOOLEAN NOT NULL DEFAULT 'f',

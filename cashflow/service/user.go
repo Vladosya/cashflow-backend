@@ -17,3 +17,7 @@ func NewUserService(r repository.TodoUser) *UserService {
 func (s *UserService) RegistrationUser() error {
 	return s.repo.RegistrationUser()
 }
+
+func (s *UserService) EntryToAd(userId int, adId int) (error, int) {
+	return s.repo.EntryToAd(userId, adId)
+}

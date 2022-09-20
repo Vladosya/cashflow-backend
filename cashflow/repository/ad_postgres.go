@@ -51,6 +51,14 @@ func (r *AdPostgres) ToCompleteAd(id int) error {
 	return nil
 }
 
+func (r *AdPostgres) CancelAd(id int) error {
+	_, err := r.db.Exec("UPDATE ad SET is_cancel = true WHERE id = $1", id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func (r *AdPostgres) SummarizingAd() error {
 	return nil
 }

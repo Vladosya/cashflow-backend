@@ -31,6 +31,10 @@ func (s *AdService) ToCompleteAd(id int) error {
 	return s.repo.ToCompleteAd(id)
 }
 
+func (s *AdService) CancelAd(id int) error {
+	return s.repo.CancelAd(id)
+}
+
 func (s *AdService) SummarizingAd() error {
 	return s.repo.SummarizingAd()
 }

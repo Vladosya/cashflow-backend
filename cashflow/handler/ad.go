@@ -76,7 +76,7 @@ func (h *Handler) activateAd(c *gin.Context) {
 	})
 }
 
-func (h *Handler) ToCompleteAd(c *gin.Context) {
+func (h *Handler) toCompleteAd(c *gin.Context) {
 	type Body struct {
 		Id int `json:"id"`
 	}
@@ -93,6 +93,26 @@ func (h *Handler) ToCompleteAd(c *gin.Context) {
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"status":  http.StatusOK,
 		"message": "Успешное завершение мероприятия",
+	})
+}
+
+func (h *Handler) cancelAd(c *gin.Context) {
+	type Body struct {
+		Id int `json:"id"`
+	}
+	var body Body
+	if err := c.BindJSON(&body); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "Invalid input body")
+		return
+	}
+	err := h.services.CancelAd(body.Id)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"status":  http.StatusOK,
+		"message": "Успешная отмена мероприятия",
 	})
 }
 

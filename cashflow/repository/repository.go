@@ -14,6 +14,7 @@ type TodoAd interface {
 	CreateAd(adParam appl_row.Ad) error
 	ActivateAd(id int) error
 	ToCompleteAd(id int) error
+	CancelAd(id int) error
 	SummarizingAd() error
 }
 

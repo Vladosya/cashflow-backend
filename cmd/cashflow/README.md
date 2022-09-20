@@ -78,3 +78,19 @@ RETURN:
   -status: 200 <- typeof int
   -message: "Успешное завершение мероприятия" <- typeof string
 ```
+
+### Отмена мероприятия (если мероприятие по каким-то причинам было отменено)
+
+```sh
+Url: http://localhost:8080/api-v1/ad/cancelAd
+```js
+{
+  "body": {
+    "id": int, <- Идентификатор мероприятия из таблицы ad поле id
+  }
+}
+```sh
+RETURN: 
+  -status: 200 <- typeof int
+  -message: "Успешная отмена мероприятия" <- typeof string
+```

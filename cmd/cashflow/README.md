@@ -77,13 +77,6 @@ Url: http://localhost:8080/api-v1/ad/toCompleteAd
 RETURN: 
   -status: 200 <- typeof int
   -message: "Успешное завершение мероприятия" <- typeof string
-
-POSSIBLE MISTAKES:
-  -message: "некорректно переданы данные в body";
-  -message: "ошибка получения из базы данных";
-  -message: "ошибка преобразования полученных данных, {err}";
-  -message: "вы уже зарегистрированы на данное мероприятие";
-  -message: "ошибка изменения из базы данных, {err}";
 ```
 
 ### Отмена мероприятия (если мероприятие по каким-то причинам было отменено)
@@ -100,4 +93,28 @@ Url: http://localhost:8080/api-v1/ad/cancelAd
 RETURN: 
   -status: 200 <- typeof int
   -message: "Успешная отмена мероприятия" <- typeof string
+```
+
+### Вступление пользователя в мероприятие (пока без оплаты)
+
+```sh
+Url: http://localhost:8080/api-v1/user/entryToAd
+```js
+{
+  "body": {
+    "id_user": int, <- Идентификатор пользователя из таблицы users поле id
+    "id_ad": int <- Идентификатор мероприятия из таблицы ad поле id
+  }
+}
+```sh
+RETURN: 
+  -status: 200 <- typeof int
+  -message: "успешное вступление в мероприятие" <- typeof string
+
+POSSIBLE MISTAKES:
+  -message: "некорректно переданы данные в body";
+  -message: "ошибка получения из базы данных";
+  -message: "ошибка преобразования полученных данных, {err}";
+  -message: "вы уже зарегистрированы на данное мероприятие";
+  -message: "ошибка изменения из базы данных, {err}";
 ```

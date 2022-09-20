@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"github.com/Vladosya/our_project/appl_row"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -19,5 +20,21 @@ func (r *AdPostgres) AdChangeParams(city string, price int) error {
 	if err != nil {
 		return err
 	}
+	return nil
+}
+
+func (r *AdPostgres) CreateAd(adParam appl_row.Ad) error {
+	_, err := r.db.Exec("INSERT INTO ad (title, date_start, city, price, description, event_type, serial_number, points_options, is_visible) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)",
+		adParam.Title, adParam.DateStart, adParam.City,
+		adParam.Price, adParam.Description, adParam.EventType,
+		adParam.SerialNumber, adParam.PointsOptions, adParam.IsVisible,
+	)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (r *AdPostgres) SummarizingAd() error {
 	return nil
 }

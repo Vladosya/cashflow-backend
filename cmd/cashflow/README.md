@@ -19,5 +19,30 @@ Url: http://localhost:8080/api-v1/ad/changeParams
 ```sh
 RETURN: 
   -status: 200 <- typeof int
-  -message: "Успешное изменение стоимости участия в городе Екатеринбург" <- typeof string
+  -message: "Успешное изменение стоимости участия в городе {city}" <- typeof string
+```
+
+### Создание мероприятия
+
+```sh
+Url: http://localhost:8080/api-v1/ad/createAd
+```js
+{
+  "body": {
+    "title": string, <- Название
+    "date_start": TIMESTAMP, <- Дата начала (yyyy-MM-dd hh:mm:ss)
+    "city": string, <- Город
+    "price": int, <- Цена
+    "description": string, <- Описание
+    "event_type": string, <- Тип объявления ('открытая', 'закрытая')
+    "serial_number": int, <- Порядковый номер объявления
+    "points_options": int, <- Параметры зачислений баллов, которые будут использоваться в мероприятии
+    "is_visible": bool <- Если true, то объявление активное и оно становится видимым для всех пользователей. Если false, то оно является как черновик и не виден никому, кроме администратора
+    "is_finished": bool <- Если true, то мероприятие считается законченным
+  }
+}
+```sh
+RETURN: 
+  -status: 200 <- typeof int
+  -message: "Успешное создание мероприятия" <- typeof string
 ```

@@ -46,10 +46,11 @@ CREATE TABLE IF NOT EXISTS ad(
     price INTEGER,
     description VARCHAR(255) NOT NULL,
     event_type VARCHAR(255) NOT NULL,
-    participant INTEGER[],
+    participant INTEGER[] DEFAULT '{}',
     serial_number INTEGER NOT NULL,
     points_options INTEGER,
     is_visible BOOLEAN NOT NULL DEFAULT 'f',
+    is_finished BOOLEAN NOT NULL DEFAULT 'f',
     FOREIGN KEY (points_options) REFERENCES points_game (id),
     FOREIGN KEY (price) REFERENCES ad_params (id)
 );

@@ -1,6 +1,7 @@
 package service
 
 import (
+	"github.com/Vladosya/our_project/appl_row"
 	"github.com/Vladosya/our_project/cashflow/repository"
 )
 
@@ -10,6 +11,8 @@ type TodoUser interface {
 
 type TodoAd interface {
 	AdChangeParams(city string, price int) error
+	CreateAd(adParam appl_row.Ad) error
+	SummarizingAd() error
 }
 
 type Service struct {

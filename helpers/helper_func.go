@@ -34,18 +34,28 @@ func ReturnJSONB(needJson string) []byte {
 	return s
 }
 
-func testTableNums(participantCount int) int { // посчитать кол-во столов от кол-ва участников
+func CalculateByTableNums(participantCount int) int { // посчитать кол-во столов от кол-ва участников
 	if participantCount == 0 {
 		return 0
 	}
-	if participantCount < 8 {
+	if participantCount < 9 {
 		return 1
 	} else {
-		var numOfTab = participantCount % 7
+		var numOfTab = participantCount % 8
 		if numOfTab == 0 {
-			return participantCount / 7
+			return participantCount / 8
 		} else {
-			return (participantCount / 7) + 1
+			return (participantCount / 8) + 1
 		}
 	}
+}
+
+func CalculateByTableLimit(limitTable int, currentParticipant int) bool { // проверка на ограничение по количеству столов (если true, то разрешена регистрация на мероприятие, иначе false)
+	if (limitTable * 8) > currentParticipant {
+		return true
+	}
+	if (limitTable * 8) <= currentParticipant {
+		return false
+	}
+	return false
 }

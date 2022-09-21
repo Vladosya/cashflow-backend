@@ -35,15 +35,16 @@ func (h *Handler) adChangeParams(c *gin.Context) {
 
 func (h *Handler) createAd(c *gin.Context) {
 	type Body struct {
-		Title         string `json:"title"`
-		DateStart     string `json:"date_start"`
-		City          string `json:"city"`
-		Price         int    `json:"price"`
-		Description   string `json:"description"`
-		EventType     string `json:"event_type"`
-		SerialNumber  int    `json:"serial_number"`
-		PointsOptions int    `json:"points_options"`
-		IsVisible     bool   `json:"is_visible"`
+		Title            string `json:"title"`
+		DateStart        string `json:"date_start"`
+		City             string `json:"city"`
+		Price            int    `json:"price"`
+		Description      string `json:"description"`
+		EventType        string `json:"event_type"`
+		SerialNumber     int    `json:"serial_number"`
+		PointsOptions    int    `json:"points_options"`
+		IsVisible        bool   `json:"is_visible"`
+		LimitationTables int    `json:"limitation_tables"`
 	}
 	var body Body
 	if err := c.BindJSON(&body); err != nil {

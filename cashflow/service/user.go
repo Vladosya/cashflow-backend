@@ -21,3 +21,7 @@ func (s *UserService) RegistrationUser() (error, int) {
 func (s *UserService) EntryToAd(userId int, adId int) (error, int) {
 	return s.repo.EntryToAd(userId, adId)
 }
+
+func (s *UserService) RefusalAd(userId int, adId int) (error, int) {
+	return s.repo.RefusalAd(userId, adId)
+}

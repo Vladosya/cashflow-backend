@@ -6,6 +6,15 @@ import (
 	"time"
 )
 
+func ContainsInt(a []int, x int) bool {
+	for _, n := range a {
+		if x == n {
+			return true
+		}
+	}
+	return false
+}
+
 func RandomStrGeneration(needLength int) string {
 	rand.Seed(time.Now().UnixNano())
 	chars := []rune("ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
@@ -18,4 +27,20 @@ func RandomStrGeneration(needLength int) string {
 	}
 
 	return strings.ToLower(b.String())
+}
+
+func testTableNums(participantCount int) int { // посчитать кол-во столов от кол-ва участников
+	if participantCount == 0 {
+		return 0
+	}
+	if participantCount < 8 {
+		return 1
+	} else {
+		var numOfTab = participantCount % 7
+		if numOfTab == 0 {
+			return participantCount / 7
+		} else {
+			return (participantCount / 7) + 1
+		}
+	}
 }

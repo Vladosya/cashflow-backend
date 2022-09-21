@@ -8,6 +8,7 @@ import (
 type TodoUser interface {
 	RegistrationUser() (error, int)
 	EntryToAd(userId int, adId int) (error, int)
+	RefusalAd(userId int, adId int) (error, int)
 }
 
 type TodoAd interface {

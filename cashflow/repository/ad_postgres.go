@@ -121,3 +121,17 @@ func (r *AdPostgres) SummarizingAd(adId int, winnersPart []appl_row.WinnersPart)
 	}
 	return fmt.Errorf("успешное распределение баллов"), http.StatusOK
 }
+
+func (r *AdPostgres) GetAllAd() (error, int) { // Получить все мероприятия за промежуток от сегодняшнего дня + 30 дней
+	currentDate := time.Now()
+	fmt.Println(currentDate)
+	afterThirtyDate := currentDate.AddDate(0, 0, 30)
+	fmt.Println("afterThirtyDate -->", afterThirtyDate)
+	//rowAds, err := r.db.Query("SELECT * FROM ad WHERE date_start < $1", afterThirtyDate)
+	//if err != nil {
+	//	return fmt.Errorf("ошибка получения из базы данных, %s", err), http.StatusInternalServerError
+	//}
+	//defer rowAds.Close()
+	//var ad []Ad
+	return fmt.Errorf("успешное получение всех мероприятий"), http.StatusOK
+}

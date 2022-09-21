@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="1ff73f76-55d3-44ab-9bed-0135f1cec83b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/cashflow/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/cashflow/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cashflow/handler/ad.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/handler/ad.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cashflow/handler/handle.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/handler/handle.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cashflow/repository/ad_postgres.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/repository/ad_postgres.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cashflow/repository/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/repository/repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cashflow/service/ad.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/service/ad.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cashflow/service/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/service/service.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

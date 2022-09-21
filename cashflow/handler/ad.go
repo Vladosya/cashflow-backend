@@ -172,3 +172,18 @@ func (h *Handler) summarizingAd(c *gin.Context) {
 		"message": err.Error(),
 	})
 }
+
+func (h *Handler) getAllAd(c *gin.Context) {
+	err, statusCode := h.services.GetAllAd()
+	if err != nil {
+		c.JSON(statusCode, map[string]interface{}{
+			"status":  statusCode,
+			"message": err.Error(),
+		})
+		return
+	}
+	c.JSON(statusCode, map[string]interface{}{
+		"status":  statusCode,
+		"message": err.Error(),
+	})
+}

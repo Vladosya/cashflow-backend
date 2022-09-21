@@ -18,6 +18,7 @@ type TodoAd interface {
 	ToCompleteAd(id int) (error, int)
 	CancelAd(id int) (error, int)
 	SummarizingAd(adId int, winnersPart []appl_row.WinnersPart) (error, int)
+	GetAllAd() (error, int)
 }
 
 type Service struct {

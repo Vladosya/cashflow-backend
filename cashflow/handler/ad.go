@@ -145,4 +145,29 @@ func (h *Handler) cancelAd(c *gin.Context) {
 	})
 }
 
-func (h *Handler) summarizingAd(c *gin.Context) {}
+func (h *Handler) summarizingAd(c *gin.Context) {
+	type Body struct {
+		IdAd        int                    `json:"id_ad"`
+		WinnersPart []appl_row.WinnersPart `json:"winners_part"`
+	}
+	var body Body
+	if err := c.BindJSON(&body); err != nil {
+		c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"status":  http.StatusBadRequest,
+			"message": "некорректно переданы данные в body",
+		})
+		return
+	}
+	err, statusCode := h.services.SummarizingAd(body.IdAd, body.WinnersPart)
+	if err != nil {
+		c.JSON(statusCode, map[string]interface{}{
+			"status":  statusCode,
+			"message": err.Error(),
+		})
+		return
+	}
+	c.JSON(statusCode, map[string]interface{}{
+		"status":  statusCode,
+		"message": err.Error(),
+	})
+}

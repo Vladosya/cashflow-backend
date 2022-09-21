@@ -17,7 +17,7 @@ type TodoAd interface {
 	ActivateAd(id int) (error, int)
 	ToCompleteAd(id int) (error, int)
 	CancelAd(id int) (error, int)
-	SummarizingAd() (error, int)
+	SummarizingAd(adId int, winnersPart []appl_row.WinnersPart) (error, int)
 }
 
 type Repository struct {

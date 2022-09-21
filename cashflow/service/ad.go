@@ -35,6 +35,6 @@ func (s *AdService) CancelAd(id int) (error, int) {
 	return s.repo.CancelAd(id)
 }
 
-func (s *AdService) SummarizingAd() (error, int) {
-	return s.repo.SummarizingAd()
+func (s *AdService) SummarizingAd(adId int, winnersPart []appl_row.WinnersPart) (error, int) {
+	return s.repo.SummarizingAd(adId, winnersPart)
 }

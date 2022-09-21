@@ -29,6 +29,11 @@ func RandomStrGeneration(needLength int) string {
 	return strings.ToLower(b.String())
 }
 
+func ReturnJSONB(needJson string) []byte {
+	s := []byte(needJson)
+	return s
+}
+
 func testTableNums(participantCount int) int { // посчитать кол-во столов от кол-ва участников
 	if participantCount == 0 {
 		return 0

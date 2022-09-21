@@ -32,8 +32,8 @@ CREATE TABLE IF NOT EXISTS points_game(
 
 INSERT INTO points_game(title, city, version, scoring) VALUES('Зачисление баллов после игры для Екатеринбурга', 'Екатеринбург', 1, '[{"id": "1", "place": 1, "numberPoints": 9}, {"id": "2", "place": 2, "numberPoints": 7}, {"id": "3", "place": 3, "numberPoints": 6}, {"id": "4", "place": 4, "numberPoints": 5}, {"id": "5", "place": 5, "numberPoints": 4}, {"id": "6", "place": 6, "numberPoints": 3}, {"id": "7", "place": 7, "numberPoints": 1}]');
 INSERT INTO points_game(title, city, version, scoring) VALUES('Зачисление баллов после игры для Екатеринбурга', 'Екатеринбург', 2, '[{"id": "1", "place": 1, "numberPoints": 11}, {"id": "2", "place": 2, "numberPoints": 7}, {"id": "3", "place": 3, "numberPoints": 6}, {"id": "4", "place": 4, "numberPoints": 5}, {"id": "5", "place": 5, "numberPoints": 4}, {"id": "6", "place": 6, "numberPoints": 3}, {"id": "7", "place": 7, "numberPoints": 1}]');
-INSERT INTO points_game(title, city, version, scoring) VALUES('Зачисление баллов после игры для города Москва', 'Москва', 1, '[{"id": "1", "place": 1, "numberPoints": 10}, {"id": "2", "place": 2, "numberPoints": 8}, {"id": "3", "place": 3, "numberPoints": 6}, {"id": "4", "place": 4, "numberPoints": 5}, {"id": "5", "place": 5, "numberPoints": 4}, {"id": "6", "place": 6, "numberPoints": 3}, {"id": "7", "place": 7, "numberPoints": 1}]');
-INSERT INTO points_game(title, city, version, scoring) VALUES('Зачисление баллов после игры для города Москва', 'Москва', 2, '[{"id": "1", "place": 1, "numberPoints": 11}, {"id": "2", "place": 2, "numberPoints": 9}, {"id": "3", "place": 3, "numberPoints": 7}, {"id": "4", "place": 4, "numberPoints": 5}, {"id": "5", "place": 5, "numberPoints": 4}, {"id": "6", "place": 6, "numberPoints": 3}, {"id": "7", "place": 7, "numberPoints": 1}]');
+INSERT INTO points_game(title, city, version, scoring) VALUES('Зачисление баллов после игры для города Москва', 'Москва', 1, '{"winRes": [{"id": 1, "place": 1, "numberPoints": 10}, {"id": 2, "place": 2, "numberPoints": 8}, {"id": 3, "place": 3, "numberPoints": 6}, {"id": 4, "place": 4, "numberPoints": 5}, {"id": 5, "place": 5, "numberPoints": 4}, {"id": 6, "place": 6, "numberPoints": 3}, {"id": 7, "place": 7, "numberPoints": 1}, {"id": 8, "place": 8, "numberPoints": 0}]}');
+INSERT INTO points_game(title, city, version, scoring) VALUES('Зачисление баллов после игры для города Москва', 'Москва', 2, '{"winRes": [{"id": 1, "place": 1, "numberPoints": 11}, {"id": 2, "place": 2, "numberPoints": 9}, {"id": 3, "place": 3, "numberPoints": 8}, {"id": 4, "place": 4, "numberPoints": 6}, {"id": 5, "place": 5, "numberPoints": 4}, {"id": 6, "place": 6, "numberPoints": 3}, {"id": 7, "place": 7, "numberPoints": 1}, {"id": 8, "place": 8, "numberPoints": 0}]}');
 
 -- Зачисление баллов после игры.
 CREATE TABLE IF NOT EXISTS ad(
@@ -60,7 +60,8 @@ CREATE TABLE IF NOT EXISTS distribution_points(
     id SERIAL PRIMARY KEY NOT NULL,
     id_ad INTEGER,
     winners_part jsonb,
-    isaccrued_points BOOLEAN NOT NULL DEFAULT 'f'
+    is_accrued_points BOOLEAN NOT NULL DEFAULT 'f',
+    FOREIGN KEY (id_ad) REFERENCES ad (id)
 );
 
 -- Вся информация о городе с его доступными абонементами и начислениями бонусов.

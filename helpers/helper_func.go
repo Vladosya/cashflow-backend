@@ -1,6 +1,10 @@
 package helpers
 
 import (
+	"encoding/json"
+	"fmt"
+	"github.com/Vladosya/our_project/appl_row"
+	"github.com/bradfitz/iter"
 	"math/rand"
 	"strings"
 	"time"
@@ -62,4 +66,75 @@ func CalculateByTableLimit(limitTable int, currentParticipant int) bool { // п�
 		return false
 	}
 	return false
+}
+
+func GenSeatAtTableByTableLen(needTable int) []byte { // ф-ция, которая генерирует json форму для созданного мероприятия, где администратор будет рассаживать игроков в зависимости от того, сколько столов мы передали
+	if needTable == 0 {
+		return []byte{}
+	} else {
+		var candidates []appl_row.SeatAtTables
+		for i := range iter.N(needTable) {
+			candidates = append(candidates, appl_row.SeatAtTables{
+				Id:   i + 1,
+				Name: fmt.Sprintf("Стол %d", i+1),
+				SeatAtTable: []appl_row.SeatAtTable{
+					{
+						Id:     1,
+						Name:   nil,
+						IdUser: nil,
+						Rank:   nil,
+					},
+					{
+						Id:     2,
+						Name:   nil,
+						IdUser: nil,
+						Rank:   nil,
+					},
+					{
+						Id:     3,
+						Name:   nil,
+						IdUser: nil,
+						Rank:   nil,
+					},
+					{
+						Id:     4,
+						Name:   nil,
+						IdUser: nil,
+						Rank:   nil,
+					},
+					{
+						Id:     5,
+						Name:   nil,
+						IdUser: nil,
+						Rank:   nil,
+					},
+					{
+						Id:     6,
+						Name:   nil,
+						IdUser: nil,
+						Rank:   nil,
+					},
+					{
+						Id:     7,
+						Name:   nil,
+						IdUser: nil,
+						Rank:   nil,
+					},
+					{
+						Id:     8,
+						Name:   nil,
+						IdUser: nil,
+						Rank:   nil,
+					},
+				},
+			})
+		}
+		jsonData, err := json.Marshal(candidates)
+		if err != nil {
+			fmt.Printf("could not marshal json: %s\n", err)
+			return []byte{}
+		}
+		fmt.Println("jsonData -->", jsonData)
+		return jsonData
+	}
 }

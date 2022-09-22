@@ -56,6 +56,14 @@ CREATE TABLE IF NOT EXISTS ad(
     FOREIGN KEY (price) REFERENCES ad_params (id)
 );
 
+CREATE TABLE IF NOT EXISTS game(
+    id SERIAL PRIMARY KEY NOT NULL,
+    id_ad INTEGER,
+    seat_at_table jsonb NOT NULL,
+    is_finished BOOLEAN NOT NULL DEFAULT 'f',
+    FOREIGN KEY (id_ad) REFERENCES ad (id)
+);
+
 -- Таблица с распределёнными баллами участникам за пройденное мероприятие.
 CREATE TABLE IF NOT EXISTS distribution_points(
     id SERIAL PRIMARY KEY NOT NULL,

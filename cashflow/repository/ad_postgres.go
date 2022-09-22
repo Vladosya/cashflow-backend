@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Vladosya/our_project/appl_row"
+	"github.com/Vladosya/our_project/helpers"
 	"github.com/jmoiron/sqlx"
 	"net/http"
 	"time"
@@ -30,12 +31,18 @@ func (r *AdPostgres) AdChangeParams(city string, price int) (error, int) { // И
 func (r *AdPostgres) CreateAd(adParam appl_row.Ad) (error, int) { // Создание мероприятия
 	weekday := time.Now().Weekday()
 	if int(weekday) == 3 || int(weekday) == 7 {
-		_, err := r.db.Exec("INSERT INTO ad (title, date_start, city, price, description, event_type, serial_number, points_options, is_visible, limitation_tables) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)",
+		var resGenSeatAtTableByTableLen = helpers.GenSeatAtTableByTableLen(adParam.LimitationTables)
+		var adCreatedId = 0
+		err := r.db.QueryRow("INSERT INTO ad (title, date_start, city, price, description, event_type, serial_number, points_options, is_visible, limitation_tables) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id",
 			adParam.Title, adParam.DateStart, adParam.City,
 			adParam.Price, adParam.Description, adParam.EventType,
 			adParam.SerialNumber, adParam.PointsOptions, adParam.IsVisible,
 			adParam.LimitationTables,
-		)
+		).Scan(&adCreatedId)
+		if err != nil {
+			return fmt.Errorf("ошибка создания из базы данных и получение в Scan, %s", err), http.StatusInternalServerError
+		}
+		_, err = r.db.Exec("INSERT INTO game (id_ad, seat_at_table) VALUES($1, $2)", adCreatedId, resGenSeatAtTableByTableLen)
 		if err != nil {
 			return fmt.Errorf("ошибка создания из базы данных, %s", err), http.StatusInternalServerError
 		}

@@ -27,7 +27,7 @@ func (h *Handler) registrationUser(c *gin.Context) {
 	}
 	c.JSON(statusCode, map[string]interface{}{
 		"status":  statusCode,
-		"message": err.Error(),
+		"message": "успешная регистрация пользователя",
 	})
 }
 
@@ -54,7 +54,7 @@ func (h *Handler) entryToAd(c *gin.Context) {
 	}
 	c.JSON(statusCode, map[string]interface{}{
 		"status":  statusCode,
-		"message": err.Error(),
+		"message": "успешное вступление в мероприятие",
 	})
 }
 
@@ -81,6 +81,6 @@ func (h *Handler) refusalAd(c *gin.Context) {
 	}
 	c.JSON(statusCode, map[string]interface{}{
 		"status":  statusCode,
-		"message": err.Error(),
+		"message": "успешный отказ от мероприятия",
 	})
 }

@@ -40,7 +40,7 @@ type Ad struct {
 func (r *UserPostgres) RegistrationUser() (error, int) { // Регистрация пользователя
 	fmt.Println("RegistrationUser")
 	fmt.Println("helpers.RandomStrGeneration(8)", helpers.RandomStrGeneration(8))
-	return fmt.Errorf("успешная регистрация пользователя"), http.StatusOK
+	return nil, http.StatusOK
 }
 
 func (r *UserPostgres) EntryToAd(userId int, adId int) (error, int) { // Вступление в мероприятие пользователем (пока без оплаты)
@@ -83,9 +83,9 @@ func (r *UserPostgres) EntryToAd(userId int, adId int) (error, int) { // Вст�
 			}
 		}
 	}
-	return fmt.Errorf("успешное вступление в мероприятие"), http.StatusOK
+	return nil, http.StatusOK
 }
 
 func (r *UserPostgres) RefusalAd(userId int, adId int) (error, int) { // Отказ пользователя от мероприятия, в которое он уже вступил
-	return fmt.Errorf("успешный отказ от мероприятия"), http.StatusOK
+	return nil, http.StatusOK
 }

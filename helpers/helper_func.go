@@ -6,6 +6,10 @@ import (
 	"time"
 )
 
+func getCurrentDate() time.Time {
+	return time.Now()
+}
+
 func ContainsInt(a []int, x int) bool {
 	for _, n := range a {
 		if x == n {

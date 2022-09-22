@@ -24,7 +24,7 @@ func (r *AdPostgres) AdChangeParams(city string, price int) (error, int) { // И
 	if err != nil {
 		return fmt.Errorf("ошибка изменения из базы данных, %s", err), http.StatusInternalServerError
 	}
-	return fmt.Errorf("успешное изменение стоимости участия в городе %s", city), http.StatusOK
+	return nil, http.StatusOK
 }
 
 func (r *AdPostgres) CreateAd(adParam appl_row.Ad) (error, int) { // Создание мероприятия
@@ -42,7 +42,7 @@ func (r *AdPostgres) CreateAd(adParam appl_row.Ad) (error, int) { // Созда�
 	} else {
 		return fmt.Errorf("создание мероприятий разрешено по средам и воскресеньям"), http.StatusInternalServerError
 	}
-	return fmt.Errorf("успешное создание мероприятия"), http.StatusOK
+	return nil, http.StatusOK
 }
 
 func (r *AdPostgres) ActivateAd(id int) (error, int) { // Активация мероприятия (сделать видимым мероприятие для всех пользователей)
@@ -50,7 +50,7 @@ func (r *AdPostgres) ActivateAd(id int) (error, int) { // Активация м�
 	if err != nil {
 		return fmt.Errorf("ошибка обновления из базы данных, %s", err), http.StatusInternalServerError
 	}
-	return fmt.Errorf("успешная активация мероприятия"), http.StatusOK
+	return nil, http.StatusOK
 }
 
 func (r *AdPostgres) ToCompleteAd(id int) (error, int) { // Завершить мероприятия
@@ -58,7 +58,7 @@ func (r *AdPostgres) ToCompleteAd(id int) (error, int) { // Завершить �
 	if err != nil {
 		return fmt.Errorf("ошибка обновления из базы данных, %s", err), http.StatusInternalServerError
 	}
-	return fmt.Errorf("успешное завершение мероприятия"), http.StatusOK
+	return nil, http.StatusOK
 }
 
 func (r *AdPostgres) CancelAd(id int) (error, int) { // Отмена мероприятия (если мероприятие по каким-то причинам было отменено)
@@ -66,7 +66,7 @@ func (r *AdPostgres) CancelAd(id int) (error, int) { // Отмена мероп�
 	if err != nil {
 		return fmt.Errorf("ошибка обновления из базы данных, %s", err), http.StatusInternalServerError
 	}
-	return fmt.Errorf("успешная отмена мероприятия"), http.StatusOK
+	return nil, http.StatusOK
 }
 
 func (r *AdPostgres) SummarizingAd(adId int, winnersPart []appl_row.WinnersPart) (error, int) { // Распределение баллов по участникам за пройденное мероприятие
@@ -81,7 +81,7 @@ func (r *AdPostgres) SummarizingAd(adId int, winnersPart []appl_row.WinnersPart)
 		if err := rowAd.Scan(
 			&p.Id, &p.Title, &p.DateStart, &p.Created, &p.City,
 			&p.Price, &p.Description, &p.EventType, &p.Participant, &p.SerialNumber,
-			&p.PointOptions, &p.IsVisible, &p.IsFinished, &p.IsCancel,
+			&p.PointOptions, &p.IsVisible, &p.IsFinished, &p.IsCancel, &p.LimitationTables,
 		); err != nil {
 			return fmt.Errorf("ошибка преобразования полученных данных, %s", err), http.StatusInternalServerError
 		}
@@ -119,19 +119,27 @@ func (r *AdPostgres) SummarizingAd(adId int, winnersPart []appl_row.WinnersPart)
 		fmt.Println("winnersPart -->", winnersPart)
 		// ОСТАЛОСЬ пробежаться по пользователям и добавить им
 	}
-	return fmt.Errorf("успешное распределение баллов"), http.StatusOK
+	return nil, http.StatusOK
 }
 
-func (r *AdPostgres) GetAllAd() (error, int) { // Получить все мероприятия за промежуток от сегодняшнего дня + 30 дней
-	currentDate := time.Now()
-	fmt.Println(currentDate)
-	afterThirtyDate := currentDate.AddDate(0, 0, 30)
-	fmt.Println("afterThirtyDate -->", afterThirtyDate)
-	//rowAds, err := r.db.Query("SELECT * FROM ad WHERE date_start < $1", afterThirtyDate)
-	//if err != nil {
-	//	return fmt.Errorf("ошибка получения из базы данных, %s", err), http.StatusInternalServerError
-	//}
-	//defer rowAds.Close()
-	//var ad []Ad
-	return fmt.Errorf("успешное получение всех мероприятий"), http.StatusOK
+func (r *AdPostgres) GetAllAd() ([]appl_row.AdFull, error, int) { // Получить все мероприятия за промежуток от сегодняшнего дня + 30 дней
+	rowAds, err := r.db.Query("SELECT * FROM ad WHERE date_start > now() and date_start < now() + '30 days'::interval")
+	if err != nil {
+		return []appl_row.AdFull{}, fmt.Errorf("ошибка получения из базы данных, %s", err), http.StatusInternalServerError
+	}
+	defer rowAds.Close()
+	var ad []appl_row.AdFull
+	for rowAds.Next() {
+		var p appl_row.AdFull
+		if err := rowAds.Scan(
+			&p.Id, &p.Title, &p.DateStart, &p.Created, &p.City,
+			&p.Price, &p.Description, &p.EventType, &p.Participant, &p.SerialNumber,
+			&p.PointOptions, &p.IsVisible, &p.IsFinished, &p.IsCancel, &p.LimitationTables,
+		); err != nil {
+			return []appl_row.AdFull{}, fmt.Errorf("ошибка преобразования полученных данных, %s", err), http.StatusInternalServerError
+		}
+		ad = append(ad, p)
+	}
+
+	return ad, nil, http.StatusOK
 }

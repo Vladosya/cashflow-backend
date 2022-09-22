@@ -39,6 +39,6 @@ func (s *AdService) SummarizingAd(adId int, winnersPart []appl_row.WinnersPart) 
 	return s.repo.SummarizingAd(adId, winnersPart)
 }
 
-func (s *AdService) GetAllAd() (error, int) {
+func (s *AdService) GetAllAd() ([]appl_row.AdFull, error, int) {
 	return s.repo.GetAllAd()
 }

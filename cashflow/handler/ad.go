@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"github.com/Vladosya/our_project/appl_row"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -29,7 +30,7 @@ func (h *Handler) adChangeParams(c *gin.Context) {
 	}
 	c.JSON(statusCode, map[string]interface{}{
 		"status":  statusCode,
-		"message": err.Error(),
+		"message": fmt.Sprintf("успешное изменение стоимости участия в городе %s", body.City),
 	})
 }
 
@@ -64,7 +65,7 @@ func (h *Handler) createAd(c *gin.Context) {
 	}
 	c.JSON(statusCode, map[string]interface{}{
 		"status":  statusCode,
-		"message": err.Error(),
+		"message": "успешное создание мероприятия",
 	})
 }
 
@@ -90,7 +91,7 @@ func (h *Handler) activateAd(c *gin.Context) {
 	}
 	c.JSON(statusCode, map[string]interface{}{
 		"status":  statusCode,
-		"message": err.Error(),
+		"message": "успешная активация мероприятия",
 	})
 }
 
@@ -116,7 +117,7 @@ func (h *Handler) toCompleteAd(c *gin.Context) {
 	}
 	c.JSON(statusCode, map[string]interface{}{
 		"status":  statusCode,
-		"message": err.Error(),
+		"message": "успешное завершение мероприятия",
 	})
 }
 
@@ -142,7 +143,7 @@ func (h *Handler) cancelAd(c *gin.Context) {
 	}
 	c.JSON(statusCode, map[string]interface{}{
 		"status":  statusCode,
-		"message": err.Error(),
+		"message": "успешная отмена мероприятия",
 	})
 }
 
@@ -169,21 +170,23 @@ func (h *Handler) summarizingAd(c *gin.Context) {
 	}
 	c.JSON(statusCode, map[string]interface{}{
 		"status":  statusCode,
-		"message": err.Error(),
+		"message": "успешное распределение баллов",
 	})
 }
 
 func (h *Handler) getAllAd(c *gin.Context) {
-	err, statusCode := h.services.GetAllAd()
+	res, err, statusCode := h.services.GetAllAd()
 	if err != nil {
 		c.JSON(statusCode, map[string]interface{}{
 			"status":  statusCode,
 			"message": err.Error(),
+			"result":  res,
 		})
 		return
 	}
 	c.JSON(statusCode, map[string]interface{}{
 		"status":  statusCode,
-		"message": err.Error(),
+		"message": "успешное получение всех мероприятий",
+		"result":  res,
 	})
 }

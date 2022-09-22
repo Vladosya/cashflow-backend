@@ -1,5 +1,7 @@
 package appl_row
 
+import "time"
+
 type Ad struct {
 	Title            string `json:"title" binding:"required"`
 	DateStart        string `json:"date_start" binding:"required"`
@@ -11,6 +13,24 @@ type Ad struct {
 	PointsOptions    int    `json:"points_options" binding:"required"`
 	IsVisible        bool   `json:"is_visible" binding:"required"`
 	LimitationTables int    `json:"limitation_tables" binding:"required"`
+}
+
+type AdFull struct {
+	Id               int       `json:"id"`
+	Title            string    `json:"title"`
+	DateStart        time.Time `json:"date_start"`
+	Created          time.Time `json:"created"`
+	City             string    `json:"city"`
+	Price            int       `json:"price"`
+	Description      string    `json:"description"`
+	EventType        string    `json:"ок"`
+	Participant      []uint8   `json:"participant"`
+	SerialNumber     int       `json:"serial_number"`
+	PointOptions     int       `json:"point_options"`
+	IsVisible        bool      `json:"is_visible"`
+	IsFinished       bool      `json:"is_finished"`
+	IsCancel         bool      `json:"is_cancel"`
+	LimitationTables int       `json:"limitation_tables"`
 }
 
 type WinUser struct {

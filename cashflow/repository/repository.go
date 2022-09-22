@@ -22,6 +22,7 @@ type TodoAd interface {
 	ToCompleteAd(id int) (error, int)
 	CancelAd(id int) (error, int)
 	SummarizingAd(adId int, winnersPart []appl_row.WinnersPart) (error, int)
+	ReplantAd(adId int, seatAtTables []appl_row.SeatAtTables) (error, int)
 	GetAllAd() ([]appl_row.AdFull, error, int)
 }
 

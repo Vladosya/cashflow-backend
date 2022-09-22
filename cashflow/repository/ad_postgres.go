@@ -129,6 +129,18 @@ func (r *AdPostgres) SummarizingAd(adId int, winnersPart []appl_row.WinnersPart)
 	return nil, http.StatusOK
 }
 
+func (r *AdPostgres) ReplantAd(adId int, seatAtTables []appl_row.SeatAtTables) (error, int) {
+	jsonData, err := json.Marshal(seatAtTables)
+	if err != nil {
+		return fmt.Errorf("ошибка при кодировки данных в JSON, %s", err), http.StatusInternalServerError
+	}
+	_, err = r.db.Exec("UPDATE game SET seat_at_table = $1 WHERE id_ad = $2", jsonData, adId)
+	if err != nil {
+		return fmt.Errorf("ошибка обновления из базы данных, %s", err), http.StatusInternalServerError
+	}
+	return nil, http.StatusOK
+}
+
 func (r *AdPostgres) GetAllAd() ([]appl_row.AdFull, error, int) { // Получить все мероприятия за промежуток от сегодняшнего дня + 30 дней
 	rowAds, err := r.db.Query("SELECT * FROM ad WHERE date_start > now() and date_start < now() + '30 days'::interval")
 	if err != nil {

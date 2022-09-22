@@ -174,6 +174,33 @@ func (h *Handler) summarizingAd(c *gin.Context) {
 	})
 }
 
+func (h *Handler) replantAd(c *gin.Context) {
+	type Body struct {
+		IdAd         int                     `json:"id_ad"`
+		SeatAtTables []appl_row.SeatAtTables `json:"seat_at_tables"`
+	}
+	var body Body
+	if err := c.BindJSON(&body); err != nil {
+		c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"status":  http.StatusBadRequest,
+			"message": "некорректно переданы данные в body",
+		})
+		return
+	}
+	err, statusCode := h.services.ReplantAd(body.IdAd, body.SeatAtTables)
+	if err != nil {
+		c.JSON(statusCode, map[string]interface{}{
+			"status":  statusCode,
+			"message": err.Error(),
+		})
+		return
+	}
+	c.JSON(statusCode, map[string]interface{}{
+		"status":  statusCode,
+		"message": "успешное распределение пользователей по столам",
+	})
+}
+
 func (h *Handler) getAllAd(c *gin.Context) {
 	res, err, statusCode := h.services.GetAllAd()
 	if err != nil {

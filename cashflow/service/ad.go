@@ -39,6 +39,10 @@ func (s *AdService) SummarizingAd(adId int, winnersPart []appl_row.WinnersPart) 
 	return s.repo.SummarizingAd(adId, winnersPart)
 }
 
+func (s *AdService) ReplantAd(adId int, seatAtTables []appl_row.SeatAtTables) (error, int) {
+	return s.repo.ReplantAd(adId, seatAtTables)
+}
+
 func (s *AdService) GetAllAd() ([]appl_row.AdFull, error, int) {
 	return s.repo.GetAllAd()
 }

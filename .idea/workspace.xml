@@ -5,17 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ff73f76-55d3-44ab-9bed-0135f1cec83b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/cashflow/handler/support.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cashflow/repository/support_postgres.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cashflow/service/support.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appl_row/ad.go" beforeDir="false" afterPath="$PROJECT_DIR$/appl_row/ad.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cashflow/handler/ad.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/handler/ad.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cashflow/handler/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/handler/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cashflow/repository/ad_postgres.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/repository/ad_postgres.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cashflow/handler/handle.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/handler/handle.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cashflow/repository/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/repository/repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cashflow/repository/user_postgres.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/repository/user_postgres.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cashflow/service/ad.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/service/ad.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cashflow/service/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/service/service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/cashflow/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/cashflow/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers/helper_func.go" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/helper_func.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +35,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2EkitLxVXcEFy4EqgGuK6RjsEMg" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />

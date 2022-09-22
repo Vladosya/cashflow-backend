@@ -5,6 +5,10 @@ import (
 	"github.com/Vladosya/our_project/cashflow/repository"
 )
 
+type TodoSupport interface {
+	EntryToAdSupport(userId int, adId int) (error, int)
+}
+
 type TodoUser interface {
 	RegistrationUser() (error, int)
 	EntryToAd(userId int, adId int) (error, int)
@@ -22,13 +26,15 @@ type TodoAd interface {
 }
 
 type Service struct {
+	TodoSupport
 	TodoUser
 	TodoAd
 }
 
 func NewService(r *repository.Repository) *Service {
 	return &Service{
-		TodoUser: NewUserService(r.TodoUser),
-		TodoAd:   NewAdService(r.TodoAd),
+		TodoSupport: NewSupportService(r.TodoSupport),
+		TodoUser:    NewUserService(r.TodoUser),
+		TodoAd:      NewAdService(r.TodoAd),
 	}
 }

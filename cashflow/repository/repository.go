@@ -5,6 +5,10 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
+type TodoSupport interface {
+	EntryToAdSupport(userId int, adId int) (error, int)
+}
+
 type TodoUser interface {
 	RegistrationUser() (error, int)
 	EntryToAd(userId int, adId int) (error, int)
@@ -22,13 +26,15 @@ type TodoAd interface {
 }
 
 type Repository struct {
+	TodoSupport
 	TodoUser
 	TodoAd
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
-		TodoUser: NewUserPostgres(db),
-		TodoAd:   NewAdPostgres(db),
+		TodoSupport: NewSupportPostgres(db),
+		TodoUser:    NewUserPostgres(db),
+		TodoAd:      NewAdPostgres(db),
 	}
 }

@@ -231,6 +231,28 @@ POSSIBLE MISTAKES:
   -message: "ошибка обновления из базы данных, {err}";
 ```
 
+### Получить данные о том, кто за каким столом сидит и т.д (POST)
+
+```sh
+Url: http://localhost:8080/api-v1/ad/getInfoAbTables
+```js
+{
+  "body": {
+    "id_ad" int <- Идентификатор мероприятия из таблицы ad поле id или таблицы game поле id
+  }
+}
+```sh
+RETURN: 
+  -status: 200 <- typeof int
+  -message: "успешное получение информацию по столам (места игроков) в игре" <- typeof string
+  -result: [] <- []appl.GameForm
+
+POSSIBLE MISTAKES:
+  -message: "некорректно переданы данные в body";
+  -message: "ошибка получения из базы данных, {err}";
+  -message: "ошибка преобразования полученных данных, {err}";
+``` 
+
 ### Получение всех мероприятий с интервалом от сегодняшней даты + 30 дней (GET)
 
 ```sh

@@ -201,6 +201,34 @@ func (h *Handler) replantAd(c *gin.Context) {
 	})
 }
 
+func (h *Handler) getInfoAbTables(c *gin.Context) {
+	type Body struct {
+		IdAd int `json:"id_ad"`
+	}
+	var body Body
+	if err := c.BindJSON(&body); err != nil {
+		c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"status":  http.StatusBadRequest,
+			"message": "некорректно переданы данные в body",
+		})
+		return
+	}
+	res, err, statusCode := h.services.GetInfoAbTables(body.IdAd)
+	if err != nil {
+		c.JSON(statusCode, map[string]interface{}{
+			"status":  statusCode,
+			"message": err.Error(),
+			"result":  res,
+		})
+		return
+	}
+	c.JSON(statusCode, map[string]interface{}{
+		"status":  statusCode,
+		"message": "успешное получение информацию по столам (места игроков) в игре",
+		"result":  res,
+	})
+}
+
 func (h *Handler) getAllAd(c *gin.Context) {
 	res, err, statusCode := h.services.GetAllAd()
 	if err != nil {

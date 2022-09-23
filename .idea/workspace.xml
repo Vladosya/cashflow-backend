@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1ff73f76-55d3-44ab-9bed-0135f1cec83b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appl_row/game.go" beforeDir="false" afterPath="$PROJECT_DIR$/appl_row/game.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cashflow/handler/ad.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/handler/ad.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cashflow/handler/handle.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/handler/handle.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cashflow/repository/ad_postgres.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/repository/ad_postgres.go" afterDir="false" />
@@ -13,7 +14,6 @@
       <change beforePath="$PROJECT_DIR$/cashflow/service/ad.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/service/ad.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cashflow/service/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/cashflow/service/service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/cashflow/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/cashflow/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers/helper_func.go" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/helper_func.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +66,25 @@
     ]
   }
 }</component>
+  <component name="RunManager">
+    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="backend" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
+      <module name="backend" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="DIRECTORY" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />

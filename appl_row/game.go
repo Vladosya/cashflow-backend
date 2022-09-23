@@ -12,3 +12,17 @@ type SeatAtTables struct {
 	Name        string        `json:"name"`
 	SeatAtTable []SeatAtTable `json:"seat_at_table"`
 }
+
+type Game struct {
+	Id          int    `json:"id"`
+	IdAd        int    `json:"id_ad"`
+	SeatAtTable string `json:"seat_at_table"`
+	IsFinished  bool   `json:"is_finished"`
+}
+
+type GameForm struct {
+	Id          int            `json:"id"`
+	IdAd        int            `json:"id_ad"`
+	SeatAtTable []SeatAtTables `json:"seat_at_table"`
+	IsFinished  bool           `json:"is_finished"`
+}

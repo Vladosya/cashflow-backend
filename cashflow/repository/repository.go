@@ -23,6 +23,7 @@ type TodoAd interface {
 	CancelAd(id int) (error, int)
 	SummarizingAd(adId int, winnersPart []appl_row.WinnersPart) (error, int)
 	ReplantAd(adId int, seatAtTables []appl_row.SeatAtTables) (error, int)
+	GetInfoAbTables(adId int) ([]appl_row.GameForm, error, int)
 	GetAllAd() ([]appl_row.AdFull, error, int)
 }
 

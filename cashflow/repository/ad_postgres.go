@@ -118,6 +118,7 @@ func (r *AdPostgres) SummarizingAd(adId int, winnersPart []appl_row.WinnersPart)
 		if err != nil {
 			return fmt.Errorf("ошибка работы с json, %s", err), http.StatusInternalServerError
 		}
+
 		for i := 0; i < len(winnersPart); i++ { // записываем каждому игроку заработанное кол-во очков
 			for j := 0; j < len(winnersPart[i].WinUser); j++ {
 				winnersPart[i].WinUser[j].Assigned = scoring.WinRes[j].NumberPoints
@@ -139,6 +140,34 @@ func (r *AdPostgres) ReplantAd(adId int, seatAtTables []appl_row.SeatAtTables) (
 		return fmt.Errorf("ошибка обновления из базы данных, %s", err), http.StatusInternalServerError
 	}
 	return nil, http.StatusOK
+}
+
+func (r *AdPostgres) GetInfoAbTables(adId int) ([]appl_row.GameForm, error, int) {
+	rowGame, err := r.db.Query("SELECT * FROM game WHERE id_ad = $1", adId)
+	if err != nil {
+		return []appl_row.GameForm{}, fmt.Errorf("ошибка получения из базы данных, %s", err), http.StatusInternalServerError
+	}
+	defer rowGame.Close()
+	var game []appl_row.Game
+	for rowGame.Next() {
+		var p appl_row.Game
+		if err := rowGame.Scan(
+			&p.Id, &p.IdAd, &p.SeatAtTable, &p.IsFinished,
+		); err != nil {
+			return []appl_row.GameForm{}, fmt.Errorf("ошибка преобразования полученных данных, %s", err), http.StatusInternalServerError
+		}
+		game = append(game, p)
+	}
+	var formGame []appl_row.GameForm
+	var formSeatAtTable []appl_row.SeatAtTables
+	json.Unmarshal([]byte(game[0].SeatAtTable), &formSeatAtTable)
+	formGame = append(formGame, appl_row.GameForm{
+		Id:          game[0].Id,
+		IdAd:        game[0].IdAd,
+		SeatAtTable: formSeatAtTable,
+		IsFinished:  game[0].IsFinished,
+	})
+	return formGame, nil, http.StatusOK
 }
 
 func (r *AdPostgres) GetAllAd() ([]appl_row.AdFull, error, int) { // Получить все мероприятия за промежуток от сегодняшнего дня + 30 дней

@@ -43,6 +43,10 @@ func (s *AdService) ReplantAd(adId int, seatAtTables []appl_row.SeatAtTables) (e
 	return s.repo.ReplantAd(adId, seatAtTables)
 }
 
+func (s *AdService) GetInfoAbTables(adId int) ([]appl_row.GameForm, error, int) {
+	return s.repo.GetInfoAbTables(adId)
+}
+
 func (s *AdService) GetAllAd() ([]appl_row.AdFull, error, int) {
 	return s.repo.GetAllAd()
 }

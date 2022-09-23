@@ -130,7 +130,7 @@ func (r *AdPostgres) SummarizingAd(adId int, winnersPart []appl_row.WinnersPart)
 	return nil, http.StatusOK
 }
 
-func (r *AdPostgres) ReplantAd(adId int, seatAtTables []appl_row.SeatAtTables) (error, int) {
+func (r *AdPostgres) ReplantAd(adId int, seatAtTables []appl_row.SeatAtTables) (error, int) { // Пересаживание пользователей из одного стола в другой
 	jsonData, err := json.Marshal(seatAtTables)
 	if err != nil {
 		return fmt.Errorf("ошибка при кодировки данных в JSON, %s", err), http.StatusInternalServerError
@@ -142,7 +142,7 @@ func (r *AdPostgres) ReplantAd(adId int, seatAtTables []appl_row.SeatAtTables) (
 	return nil, http.StatusOK
 }
 
-func (r *AdPostgres) GetInfoAbTables(adId int) ([]appl_row.GameForm, error, int) {
+func (r *AdPostgres) GetInfoAbTables(adId int) ([]appl_row.GameForm, error, int) { // Получить данные о том, кто за каким столом сидит и т.д
 	rowGame, err := r.db.Query("SELECT * FROM game WHERE id_ad = $1", adId)
 	if err != nil {
 		return []appl_row.GameForm{}, fmt.Errorf("ошибка получения из базы данных, %s", err), http.StatusInternalServerError
@@ -190,4 +190,41 @@ func (r *AdPostgres) GetAllAd() ([]appl_row.AdFull, error, int) { // Получ�
 	}
 
 	return ad, nil, http.StatusOK
+}
+
+func (r *AdPostgres) ChangeLimitTable(adId int, newLimitationTables int) (error, int) { // Изменение количества допустимых столов с игроками в мероприятии
+	if newLimitationTables < 1 {
+		return fmt.Errorf("количество столов не может быть меньше 1"), http.StatusBadRequest
+	} else {
+		rowAd, err := r.db.Query("SELECT * FROM ad WHERE id = $1", adId)
+		if err != nil {
+			return fmt.Errorf("ошибка получения из базы данных, %s", err), http.StatusInternalServerError
+		}
+		defer rowAd.Close()
+		var ad []Ad
+		for rowAd.Next() {
+			var p Ad
+			if err := rowAd.Scan(
+				&p.Id, &p.Title, &p.DateStart, &p.Created, &p.City,
+				&p.Price, &p.Description, &p.EventType, &p.Participant, &p.SerialNumber,
+				&p.PointOptions, &p.IsVisible, &p.IsFinished, &p.IsCancel, &p.LimitationTables,
+			); err != nil {
+				return fmt.Errorf("ошибка преобразования полученных данных, %s", err), http.StatusInternalServerError
+			}
+			ad = append(ad, p)
+		}
+		if len(ad) == 0 {
+			return fmt.Errorf("данного мероприятия не существует"), http.StatusBadRequest
+		} else {
+			if ad[0].LimitationTables == newLimitationTables {
+				return fmt.Errorf("значение не было изменено потому что старое и новое значения совпадают"), http.StatusBadRequest
+			} else {
+				_, err := r.db.Exec("UPDATE ad SET limitation_tables = $1 WHERE id = $2", newLimitationTables, adId)
+				if err != nil {
+					return fmt.Errorf("ошибка обновления из базы данных, %s", err), http.StatusInternalServerError
+				}
+			}
+		}
+	}
+	return nil, http.StatusOK
 }

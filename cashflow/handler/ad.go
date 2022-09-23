@@ -245,3 +245,30 @@ func (h *Handler) getAllAd(c *gin.Context) {
 		"result":  res,
 	})
 }
+
+func (h *Handler) changeLimitTable(c *gin.Context) {
+	type Body struct {
+		IdAd                int `json:"id_ad"`
+		NewLimitationTables int `json:"new_limitation_tables"`
+	}
+	var body Body
+	if err := c.BindJSON(&body); err != nil {
+		c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"status":  http.StatusBadRequest,
+			"message": "некорректно переданы данные в body",
+		})
+		return
+	}
+	err, statusCode := h.services.ChangeLimitTable(body.IdAd, body.NewLimitationTables)
+	if err != nil {
+		c.JSON(statusCode, map[string]interface{}{
+			"status":  statusCode,
+			"message": err.Error(),
+		})
+		return
+	}
+	c.JSON(statusCode, map[string]interface{}{
+		"status":  statusCode,
+		"message": "успешное изменение количества допустимых столов",
+	})
+}

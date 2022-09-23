@@ -25,6 +25,7 @@ type TodoAd interface {
 	ReplantAd(adId int, seatAtTables []appl_row.SeatAtTables) (error, int)
 	GetInfoAbTables(adId int) ([]appl_row.GameForm, error, int)
 	GetAllAd() ([]appl_row.AdFull, error, int)
+	ChangeLimitTable(adId int, newLimitationTables int) (error, int)
 }
 
 type Service struct {

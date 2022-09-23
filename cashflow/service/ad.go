@@ -50,3 +50,7 @@ func (s *AdService) GetInfoAbTables(adId int) ([]appl_row.GameForm, error, int) 
 func (s *AdService) GetAllAd() ([]appl_row.AdFull, error, int) {
 	return s.repo.GetAllAd()
 }
+
+func (s *AdService) ChangeLimitTable(adId int, newLimitationTables int) (error, int) {
+	return s.repo.ChangeLimitTable(adId, newLimitationTables)
+}
